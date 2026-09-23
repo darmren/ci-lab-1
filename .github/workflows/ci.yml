@@ -19,9 +19,7 @@ jobs:
         with:
           java-version: '21'
           distribution: 'temurin'
-
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@af1da67850ed9a4cedd57bfd976089dd991e2582
+          cache: 'gradle'
 
       - name: Install dependencies
         run: ./gradlew dependencies
@@ -36,7 +34,7 @@ jobs:
         if: always()
         run: |
           CSV=build/reports/jacoco/test/jacocoTestReport.csv
-          PCT=$(awk -F, 'NR>1 {m+=$4; c+=$5} END {printf "%.2f", c*100/(m+c)}' $CSV)
+          PCT=$(awk -F, 'NR>1 {m+=$8; c+=$9} END {printf "%.2f", c*100/(m+c)}' $CSV)
           echo "Instruction coverage: $PCT%"
           echo "### Coverage: $PCT%" >> $GITHUB_STEP_SUMMARY
 
