@@ -12,4 +12,10 @@ public class HealthController {
     public Map<String, String> health() {
         return Map.of("status", "ok");
     }
+
+    @GetMapping("/ping")
+    public String ping() {
+        return "pong";
+    }
+
 }
