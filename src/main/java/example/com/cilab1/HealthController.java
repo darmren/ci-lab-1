@@ -8,6 +8,7 @@ import java.util.Map;
 @RestController
 public class HealthController {
 
+    // комментарий для проверки кеширования слоев
     @GetMapping("/health")
     public Map<String, String> health() {
         return Map.of("status", "ok");
