@@ -1,4 +1,4 @@
-package example.com.cilab1;
+package example.com.cilab1.visits;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 

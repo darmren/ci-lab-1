@@ -1,4 +1,4 @@
-package example.com.cilab1;
+package example.com.cilab1.visits;
 
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package example.com.cilab1;
+package example.com.cilab1.visits;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

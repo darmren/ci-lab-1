@@ -1,4 +1,4 @@
-package example.com.cilab1;
+package example.com.cilab1.visits;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
