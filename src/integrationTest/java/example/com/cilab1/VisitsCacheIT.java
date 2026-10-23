@@ -35,7 +35,7 @@ class VisitsCacheIT {
     @Test
     void secondRequestWithinTtlIsServedFromCache() throws Exception {
 
-        mockMvc.perform(get("/visits"));
+        mockMvc.perform(get("/visits/1"));
 
         mockMvc.perform(get("/visits"))
                 .andExpect(status().isOk())
