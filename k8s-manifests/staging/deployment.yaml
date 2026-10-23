@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
         - name: ci-lab
-          image: ghcr.io/darmren/ci-lab-1-staging:OLD_TAG
+          image: ghcr.io/darmren/ci-lab-1-staging:c76e988
           ports:
             - containerPort: 8080
