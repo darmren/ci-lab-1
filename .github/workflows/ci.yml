@@ -143,3 +143,23 @@ jobs:
         with:
           name: sbom-spdx
           path: sbom.spdx.json
+
+  promote-to-staging:
+    runs-on: ubuntu-latest
+    needs: [ integration-tests, docker ]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    permissions:
+      packages: write
+
+    steps:
+      - name: Compute tag and image names
+        run: |
+          echo "TAG=${GITHUB_SHA::7}" >> "$GITHUB_ENV"
+          echo "SRC=ghcr.io/${GITHUB_REPOSITORY,,}" >> "$GITHUB_ENV"
+          echo "DST=ghcr.io/${GITHUB_REPOSITORY,,}-staging" >> "$GITHUB_ENV"
+
+      - name: Log in to GHCR
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | skopeo login ghcr.io -u "${{ github.actor }}" --password-stdin
+
+      - name: Promote image without rebuild
+        run: skopeo copy docker://$SRC:$TAG docker://$DST:$TAG
