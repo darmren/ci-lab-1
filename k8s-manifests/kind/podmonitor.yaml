@@ -1,0 +1,18 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: ci-lab
+  namespace: staging
+  labels:
+    release: monitoring
+spec:
+  namespaceSelector:
+    matchNames:
+      - staging
+  selector:
+    matchLabels:
+      app: ci-lab
+  podMetricsEndpoints:
+    - targetPort: 3000
+      path: /metrics
+      interval: 15s

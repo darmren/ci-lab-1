@@ -33,6 +33,9 @@ dependencies {
 
     testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
 
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    runtimeOnly 'io.micrometer:micrometer-registry-prometheus'
+
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     runtimeOnly 'org.postgresql:postgresql'
 }

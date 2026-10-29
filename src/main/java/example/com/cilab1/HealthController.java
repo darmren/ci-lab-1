@@ -1,16 +1,24 @@
 package example.com.cilab1;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
+import java.util.concurrent.ThreadLocalRandom;
 
 @RestController
 public class HealthController {
 
-    // комментарий для проверки кеширования слоев
+    @Value("${CHAOS_MODE:false}")
+    private boolean chaosMode;
+
     @GetMapping("/health")
-    public Map<String, String> health() {
-        return Map.of("status", "ok");
+    public ResponseEntity<Map<String, String>> health() {
+        if (chaosMode && ThreadLocalRandom.current().nextDouble() < 0.3) {
+            return ResponseEntity.internalServerError().body(Map.of("status", "error"));
+        }
+        return ResponseEntity.ok(Map.of("status", "ok"));
     }
 }
