@@ -14,9 +14,12 @@ public class HealthController {
     @Value("${CHAOS_MODE:false}")
     private boolean chaosMode;
 
+    @Value("${chaos.failure-rate:0.3}")
+    private double failureRate;
+
     @GetMapping("/health")
     public ResponseEntity<Map<String, String>> health() {
-        if (chaosMode && ThreadLocalRandom.current().nextDouble() < 0.3) {
+        if (chaosMode && ThreadLocalRandom.current().nextDouble() < failureRate) {
             return ResponseEntity.internalServerError().body(Map.of("status", "error"));
         }
         return ResponseEntity.ok(Map.of("status", "ok"));
