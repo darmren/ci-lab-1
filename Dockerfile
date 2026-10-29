@@ -12,5 +12,9 @@ FROM eclipse-temurin:21-jre-alpine AS runtime
 WORKDIR /app
 
 COPY --from=build /app/build/libs/*.jar app.jar
-EXPOSE 8080
+
+ARG CHAOS_MODE=false
+ENV CHAOS_MODE=$CHAOS_MODE
+
+EXPOSE 3000
 ENTRYPOINT ["java", "-jar", "app.jar"]
